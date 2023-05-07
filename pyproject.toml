@@ -1,0 +1,21 @@
+[tool.poetry]
+name = "hackathon-be"
+version = "0.1.0"
+description = ""
+authors = ["RG1ee <niwows@yandex.ru>"]
+readme = "README.md"
+packages = [{include = "src"}]
+
+[tool.poetry.dependencies]
+python = "^3.11"
+django = "^4.2.1"
+djangorestframework = "^3.14.0"
+python-dotenv = "^1.0.0"
+
+
+[tool.poetry.group.dev.dependencies]
+pre-commit = "^3.3.1"
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"
