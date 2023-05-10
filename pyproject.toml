@@ -3,7 +3,6 @@ name = "hackathon-be"
 version = "0.1.0"
 description = ""
 authors = ["RG1ee <niwows@yandex.ru>"]
-readme = "README.md"
 packages = [{include = "src"}]
 
 [tool.poetry.dependencies]
@@ -11,11 +10,32 @@ python = "^3.11"
 django = "^4.2.1"
 djangorestframework = "^3.14.0"
 python-dotenv = "^1.0.0"
+django-phonenumber-field = {extras = ["phonenumberslite"], version = "^7.1.0"}
+gunicorn = "^20.1.0"
 
 
 [tool.poetry.group.dev.dependencies]
 pre-commit = "^3.3.1"
+ruff = "^0.0.265"
+django-stubs = "^4.2.0"
+djangorestframework-stubs = "^3.14.0"
+mypy = "^1.2.0"
+ipython = "^8.13.2"
 
 [build-system]
 requires = ["poetry-core"]
 build-backend = "poetry.core.masonry.api"
+
+[tool.django-stubs]
+django_settings_module = "src.hackathon.settings"
+ignore_missing_model_attributes = true
+
+[tool.ruff]
+ignore = ["F401", "F403", "F405"]
+exclude = [
+   "migrations",
+]
+line-length = 120
+
+[tool.poetry.scripts]
+hackathon = "src.manage:main"

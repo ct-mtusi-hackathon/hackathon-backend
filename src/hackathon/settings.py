@@ -21,6 +21,11 @@ INSTALLED_APPS = [
     "django.contrib.sessions",
     "django.contrib.messages",
     "django.contrib.staticfiles",
+    # third apps
+    "rest_framework",
+    "phonenumber_field",
+    # my apps
+    "src.apps.users",
 ]
 
 MIDDLEWARE = [
@@ -83,11 +88,13 @@ AUTH_PASSWORD_VALIDATORS = [
     },
 ]
 
+AUTH_USER_MODEL = "users.User"
+
 
 # Internationalization
 # https://docs.djangoproject.com/en/4.2/topics/i18n/
 
-LANGUAGE_CODE = "en-us"
+LANGUAGE_CODE = "ru"
 
 TIME_ZONE = "UTC"
 
