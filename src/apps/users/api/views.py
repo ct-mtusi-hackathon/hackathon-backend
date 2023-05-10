@@ -1,9 +1,9 @@
 from rest_framework import viewsets
 
 from src.apps.users.models import User
-from src.apps.users.api.serializers import UserSerializer
+from src.apps.users.api.serializers import UserProfileSerializer
 
 
-class UserViewSet(viewsets.ModelViewSet):
+class UserProfileViewSet(viewsets.ModelViewSet):
     queryset = User.objects.all()
-    serializer_class = UserSerializer
+    serializer_class = UserProfileSerializer

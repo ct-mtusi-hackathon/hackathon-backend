@@ -3,7 +3,7 @@ from django.contrib.auth.models import AbstractUser
 from django.utils.translation import gettext_lazy as _
 from phonenumber_field.modelfields import PhoneNumberField
 
-from src.apps.users.consts import UserType
+from src.apps.users.consts import UserType, UserSex
 
 
 class User(AbstractUser):
@@ -15,6 +15,9 @@ class User(AbstractUser):
     )
     email = models.EmailField(_("Почта"), unique=True)
     phone_number = PhoneNumberField(_("Номер телефона"), region="RU", blank=True)
+    sex = models.PositiveSmallIntegerField(
+        choices=UserSex.choices, default=UserSex.MALE
+    )
     type_account = models.PositiveSmallIntegerField(
         choices=UserType.choices, default=UserType.STUDENT
     )
@@ -25,4 +28,6 @@ class User(AbstractUser):
         return f"{self.last_name} {self.first_name} {self.patronymic}"
 
     class Meta:
+        verbose_name_plural = "Пользователи"
+        verbose_name = "Пользователь"
         unique_together = ("email", "type_account")

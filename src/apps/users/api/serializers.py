@@ -8,11 +8,23 @@ class UserSerializer(serializers.ModelSerializer):
         model = User
         fields = (
             "id",
+            "username",
             "first_name",
             "last_name",
             "patronymic",
+        )
+
+
+class UserProfileSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = User
+        fields = (
+            "id",
+            "first_name",
+            "last_name",
+            "patronymic",
+            "telegram_username",
             "email",
             "phone_number",
-            "telegram_username",
-            "type_account",
+            "sex",
         )
