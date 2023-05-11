@@ -23,7 +23,7 @@ cat env_sample > .env # Изменить значения
 docker-compose up --build -d
 ```
 
-## Разработка
+# Разработка
 
 ```bash
 python3.11 -m venv .venv
