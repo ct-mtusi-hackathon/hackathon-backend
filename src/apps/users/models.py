@@ -4,6 +4,7 @@ from django.utils.translation import gettext_lazy as _
 from phonenumber_field.modelfields import PhoneNumberField
 
 from src.apps.users.consts import UserType, UserSex
+from src.apps.groups.models import Group
 
 
 class User(AbstractUser):
@@ -20,6 +21,9 @@ class User(AbstractUser):
     )
     type_account = models.PositiveSmallIntegerField(
         choices=UserType.choices, default=UserType.STUDENT
+    )
+    group = models.ManyToManyField(
+        Group, related_name="groups", verbose_name=_("Группа пользователя")
     )
 
     REQUIRED_FIELDS = ["first_name", "last_name", "patronymic"]

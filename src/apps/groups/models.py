@@ -22,7 +22,11 @@ class Group(models.Model):
     )
 
     def __str__(self) -> str:
-        return f"{self.direction.short_name}{self.class_grade}-{self.number_course}{str(self.date_of_creation.year)[2:]}{self.letter_group}"
+        return (
+            f"{self.direction.short_name}"
+            f"{self.class_grade}-{self.number_course}"
+            f"{str(self.date_of_creation.year)[2:]}{self.letter_group}"
+        )
 
     class Meta:
         verbose_name = "Группа"

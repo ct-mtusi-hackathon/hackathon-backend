@@ -16,6 +16,8 @@ class UserSerializer(serializers.ModelSerializer):
 
 
 class UserProfileSerializer(serializers.ModelSerializer):
+    group = serializers.StringRelatedField(many=True)
+
     class Meta:
         model = User
         fields = (
@@ -27,4 +29,5 @@ class UserProfileSerializer(serializers.ModelSerializer):
             "email",
             "phone_number",
             "sex",
+            "group",
         )
