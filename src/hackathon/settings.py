@@ -27,6 +27,7 @@ INSTALLED_APPS = [
     "drf_spectacular",
     # my apps
     "src.apps.users",
+    "src.apps.groups",
 ]
 
 MIDDLEWARE = [
