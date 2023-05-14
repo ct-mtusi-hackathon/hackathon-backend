@@ -25,6 +25,7 @@ INSTALLED_APPS = [
     "rest_framework",
     "phonenumber_field",
     "drf_spectacular",
+    "django_extensions",
     # my apps
     "src.apps.users",
     "src.apps.groups",

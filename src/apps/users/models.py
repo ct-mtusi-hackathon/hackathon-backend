@@ -4,22 +4,28 @@ from django.utils.translation import gettext_lazy as _
 from phonenumber_field.modelfields import PhoneNumberField
 
 from src.apps.users.consts import UserType, UserSex
+from src.apps.groups.models import Group
 
 
 class User(AbstractUser):
-    last_name = models.CharField(_("Фамилия"), max_length=150, blank=True)
-    first_name = models.CharField(_("Имя"), max_length=150, blank=True)
-    patronymic = models.CharField(_("Отчество"), max_length=150, blank=True)
+    last_name = models.CharField(_("Фамилия"), max_length=150)
+    first_name = models.CharField(_("Имя"), max_length=150)
+    patronymic = models.CharField(_("Отчество"), max_length=150)
     telegram_username = models.CharField(
-        _("telegram username"), max_length=150, null=True
+        _("Никнейм Telegram"), max_length=150, null=True, blank=True
     )
-    email = models.EmailField(_("Почта"), unique=True)
-    phone_number = PhoneNumberField(_("Номер телефона"), region="RU", blank=True)
+    email = models.EmailField(_("Почта"), unique=True, null=True, blank=True)
+    phone_number = PhoneNumberField(
+        _("Номер телефона"), region="RU", null=True, blank=True
+    )
     sex = models.PositiveSmallIntegerField(
         choices=UserSex.choices, default=UserSex.MALE
     )
     type_account = models.PositiveSmallIntegerField(
         choices=UserType.choices, default=UserType.STUDENT
+    )
+    group = models.ManyToManyField(
+        Group, related_name="groups", verbose_name=_("Группа пользователя")
     )
 
     REQUIRED_FIELDS = ["first_name", "last_name", "patronymic"]
