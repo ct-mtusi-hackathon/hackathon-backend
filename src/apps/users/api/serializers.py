@@ -28,6 +28,5 @@ class UserProfileSerializer(serializers.ModelSerializer):
             "telegram_username",
             "email",
             "phone_number",
-            "sex",
             "group",
         )

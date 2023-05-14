@@ -8,14 +8,16 @@ from src.apps.groups.models import Group
 
 
 class User(AbstractUser):
-    last_name = models.CharField(_("Фамилия"), max_length=150, blank=True)
-    first_name = models.CharField(_("Имя"), max_length=150, blank=True)
-    patronymic = models.CharField(_("Отчество"), max_length=150, blank=True)
+    last_name = models.CharField(_("Фамилия"), max_length=150)
+    first_name = models.CharField(_("Имя"), max_length=150)
+    patronymic = models.CharField(_("Отчество"), max_length=150)
     telegram_username = models.CharField(
-        _("telegram username"), max_length=150, null=True
+        _("Никнейм Telegram"), max_length=150, null=True, blank=True
     )
-    email = models.EmailField(_("Почта"), unique=True)
-    phone_number = PhoneNumberField(_("Номер телефона"), region="RU", blank=True)
+    email = models.EmailField(_("Почта"), unique=True, null=True, blank=True)
+    phone_number = PhoneNumberField(
+        _("Номер телефона"), region="RU", null=True, blank=True
+    )
     sex = models.PositiveSmallIntegerField(
         choices=UserSex.choices, default=UserSex.MALE
     )

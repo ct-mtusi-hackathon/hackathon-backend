@@ -24,6 +24,7 @@ djangorestframework-stubs = "^3.14.0"
 mypy = "^1.2.0"
 ipython = "^8.13.2"
 drf-spectacular = "^0.26.2"
+django-extensions = "^3.2.1"
 
 [build-system]
 requires = ["poetry-core"]
