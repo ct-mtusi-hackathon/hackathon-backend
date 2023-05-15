@@ -81,7 +81,6 @@ class UserUpdateProfile(serializers.ModelSerializer):
         return new_password
 
     def update(self, instance, validated_data):
-        print(validated_data)
         instance.email = validated_data["email"]
         instance.phone_number = validated_data["phone_number"]
         instance.username = validated_data["username"]

@@ -1,5 +1,6 @@
 from rest_framework import viewsets
 from rest_framework.decorators import action
+from rest_framework.permissions import IsAuthenticated
 from rest_framework.request import Request
 from rest_framework.response import Response
 
@@ -12,12 +13,17 @@ from src.apps.users.api.serializers import (
 )
 
 
-class UserProfileViewSet(SerializerPerAction, viewsets.ModelViewSet):
+class UserProfileViewSet(
+    SerializerPerAction, PermissionPerAction, viewsets.ModelViewSet
+):
     queryset = User.objects.all()
     action_serializers = {
         "default": UserSerializer,
         "profile": UserProfileSerializer,
         "update_profile": UserUpdateProfile,
+    }
+    action_permissions = {
+        "default": IsAuthenticated,
     }
 
     @action(methods=["GET"], detail=True)
