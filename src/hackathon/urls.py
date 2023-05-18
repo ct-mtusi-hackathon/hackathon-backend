@@ -4,10 +4,12 @@ from rest_framework.routers import SimpleRouter
 from drf_spectacular.views import SpectacularAPIView, SpectacularSwaggerView
 
 from src.apps.users.api.views import UserProfileViewSet
+from src.apps.events.api.views import EventViewSet
 
 
 router = SimpleRouter()
 router.register("users", UserProfileViewSet)
+router.register("events", EventViewSet)
 
 urlpatterns = [
     path("admin/", admin.site.urls),

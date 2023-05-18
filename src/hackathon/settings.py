@@ -31,6 +31,7 @@ INSTALLED_APPS = [
     # my apps
     "src.apps.users",
     "src.apps.groups",
+    "src.apps.events",
 ]
 
 MIDDLEWARE = [

@@ -22,9 +22,7 @@ class UserProfileViewSet(
         "profile": UserProfileSerializer,
         "update_profile": UserUpdateProfile,
     }
-    action_permissions = {
-        "default": IsAuthenticated,
-    }
+    action_permissions = {"default": (IsAuthenticated,)}
 
     @action(methods=["GET"], detail=True)
     def profile(self, request: Request, *args, **kwargs):
@@ -37,4 +35,4 @@ class UserProfileViewSet(
         serializer = self.get_serializer(data=request.data, instance=request.user)
         serializer.is_valid(raise_exception=True)
         serializer.save()
-        return Response("Profile changed")
+        return Response("Профиль изменен!")
