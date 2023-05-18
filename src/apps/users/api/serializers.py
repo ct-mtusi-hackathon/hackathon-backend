@@ -62,7 +62,7 @@ class UserUpdateProfile(serializers.ModelSerializer):
         user = self.context["request"].user
         if not user.check_password(old_password):
             raise serializers.ValidationError(
-                {"password": "The old password is incorrect"},
+                {"password": "Старый пароль неверный!"},
             )
 
     def validate_new_password(self, new_password):
@@ -70,12 +70,12 @@ class UserUpdateProfile(serializers.ModelSerializer):
         confirm_new_password = self.initial_data.get("confirm_new_password")
         if old_password == new_password:
             raise serializers.ValidationError(
-                {"password": "Passwords match"},
+                {"password": "Старый пароль совпадает с новым паролем!"},
             )
 
         if new_password != confirm_new_password:
             raise serializers.ValidationError(
-                {"password": "Password do not match"},
+                {"password": "Пароли не совпадают"},
             )
 
         return new_password

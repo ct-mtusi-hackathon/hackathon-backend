@@ -1,5 +1,5 @@
 #!/bin/bash
 
-upstudy collectstatic --noinput
+hackathon collectstatic --noinput
 hackathon migrate
 "$@"
