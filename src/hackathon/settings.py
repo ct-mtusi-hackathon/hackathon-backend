@@ -34,6 +34,7 @@ INSTALLED_APPS = [
     "src.apps.groups",
     "src.apps.events",
     "src.apps.base",
+    "src.apps.web",
 ]
 
 MIDDLEWARE = [
