@@ -1,9 +1,12 @@
 from rest_framework import serializers
 
 from src.apps.events.models import Event
+from src.apps.base.api.serializers import ImageUriSerializer
 
 
 class EventSerializer(serializers.ModelSerializer):
+    image = ImageUriSerializer(read_only=True)
+
     class Meta:
         model = Event
         fields = (

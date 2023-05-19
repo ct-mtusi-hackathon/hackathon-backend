@@ -9,3 +9,14 @@ class ImageUploadSerializer(serializers.ModelSerializer):
     class Meta:
         model = Image
         fields = ("pk", "photo", "uploaded_by", "title", "size")
+
+
+class ImageUriSerializer(serializers.ModelSerializer):
+    photo = serializers.ImageField(use_url=True)
+
+    class Meta:
+        model = Image
+        fields = (
+            "uuid",
+            "photo",
+        )
