@@ -6,6 +6,7 @@ from rest_framework.response import Response
 
 from src.apps.users.models import User
 from src.apps.base.api.mixins import PermissionPerAction, SerializerPerAction
+from src.apps.events.api.serializers import EventSerializer
 from src.apps.users.api.serializers import (
     UserProfileSerializer,
     UserSerializer,
@@ -21,6 +22,7 @@ class UserProfileViewSet(
         "default": UserSerializer,
         "profile": UserProfileSerializer,
         "update_profile": UserUpdateProfile,
+        "my_events": EventSerializer,
     }
     action_permissions = {"default": (IsAuthenticated,)}
 
@@ -36,3 +38,13 @@ class UserProfileViewSet(
         serializer.is_valid(raise_exception=True)
         serializer.save()
         return Response("Профиль изменен!")
+
+    @action(methods=["GET"], detail=True)
+    def my_events(self, request: Request, *args, **kwargs):
+        user = self.get_object()
+        user_events = user.events_participating.all()
+        serializer = self.get_serializer(user_events, many=True)
+        if user_events == []:
+            return Response("Вы не участвуете в мероприятиях!")
+        else:
+            return Response(serializer.data)
