@@ -17,6 +17,7 @@ class UserSerializer(serializers.ModelSerializer):
             "last_name",
             "patronymic",
             "group",
+            "coins",
         )
 
 
@@ -34,6 +35,7 @@ class UserProfileSerializer(serializers.ModelSerializer):
             "email",
             "phone_number",
             "group",
+            "coins",
         )
 
 
