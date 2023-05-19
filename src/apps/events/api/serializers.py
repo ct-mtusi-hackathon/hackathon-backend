@@ -10,8 +10,11 @@ class EventSerializer(serializers.ModelSerializer):
             "id",
             "title",
             "description",
+            "image",
             "start_date",
             "end_date",
             "location",
+            "coins_for_registration",
+            "coins_for_victory",
             "is_active",
         )

@@ -14,6 +14,7 @@ router.register("events", EventViewSet)
 urlpatterns = [
     path("admin/", admin.site.urls),
     path("api/v1/", include(router.urls)),
+    path("api/v1/", include("src.apps.base.api.urls")),
     path("api/v1/schema/", SpectacularAPIView.as_view(), name="schema"),
     path("api/v1/", include("src.apps.auth.api.urls")),
     path(
