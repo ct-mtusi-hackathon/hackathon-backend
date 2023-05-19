@@ -27,6 +27,7 @@ class User(AbstractUser):
     group = models.ManyToManyField(
         Group, related_name="groups", verbose_name=_("Группа пользователя")
     )
+    coins = models.PositiveIntegerField(_("Количество коинов"), default=0)
 
     REQUIRED_FIELDS = ["first_name", "last_name", "patronymic"]
 
