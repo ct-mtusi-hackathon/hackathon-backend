@@ -21,3 +21,12 @@ class EventSerializer(serializers.ModelSerializer):
             "coins_for_victory",
             "is_active",
         )
+
+
+class EventRegisterUnRegisterSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Event
+        fields = (
+            "id",
+            "title",
+        )
