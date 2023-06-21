@@ -26,22 +26,21 @@ class UserProfileViewSet(
     }
     action_permissions = {"default": (IsAuthenticated,)}
 
-    @action(methods=["GET"], detail=True)
+    @action(methods=["GET"], detail=False)
     def profile(self, request: Request, *args, **kwargs):
-        queryset = self.get_object()
-        serializer = self.get_serializer(queryset)
+        serializer = self.get_serializer(request.user)
         return Response(serializer.data)
 
-    @action(methods=["PATCH"], detail=True)
+    @action(methods=["PATCH"], detail=False)
     def update_profile(self, request: Request, *args, **kwargs):
         serializer = self.get_serializer(data=request.data, instance=request.user)
         serializer.is_valid(raise_exception=True)
         serializer.save()
         return Response("Профиль изменен!")
 
-    @action(methods=["GET"], detail=True)
+    @action(methods=["GET"], detail=False)
     def my_events(self, request: Request, *args, **kwargs):
-        user = self.get_object()
+        user = request.user
         user_events = user.events_participating.all()
         serializer = self.get_serializer(user_events, many=True)
         if user_events == []:
