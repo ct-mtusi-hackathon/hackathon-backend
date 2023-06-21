@@ -7,7 +7,6 @@ from drf_spectacular.views import SpectacularAPIView, SpectacularSwaggerView
 
 from src.apps.users.api.views import UserProfileViewSet
 from src.apps.events.api.views import EventViewSet
-from src.apps.web.views import main_page
 
 
 router = SimpleRouter()
@@ -15,7 +14,6 @@ router.register("users", UserProfileViewSet)
 router.register("events", EventViewSet)
 
 urlpatterns = [
-    path("", main_page),
     path("admin/", admin.site.urls),
     path("api/v1/", include(router.urls)),
     path("api/v1/", include("src.apps.base.api.urls")),
