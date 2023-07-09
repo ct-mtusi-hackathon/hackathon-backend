@@ -1,6 +1,6 @@
 import os
-from pathlib import Path
 
+from pathlib import Path
 from datetime import timedelta
 
 from dotenv import load_dotenv
@@ -12,6 +12,7 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 SECRET_KEY = os.getenv("SECRET_KEY", default="a;ldkjfa;lkdsjoiwe-342-3")
 DEBUG = bool(os.getenv("DEBUG", 1))
 WHITENOISE_ENABLED = bool(os.getenv("WHITENOISE_ENABLED", True))
+CORS_ALLOW_ALL_ORIGINS = os.getenv("CORS_ALLOW_ALL_ORIGINS", default=True)
 ALLOWED_HOSTS = ["*"]
 
 
@@ -25,6 +26,7 @@ INSTALLED_APPS = [
     "django.contrib.messages",
     "django.contrib.staticfiles",
     # third apps
+    "corsheaders",
     "rest_framework",
     "phonenumber_field",
     "drf_spectacular",
@@ -39,6 +41,7 @@ INSTALLED_APPS = [
 MIDDLEWARE = [
     "django.middleware.security.SecurityMiddleware",
     "django.contrib.sessions.middleware.SessionMiddleware",
+    "corsheaders.middleware.CorsMiddleware",
     "django.middleware.common.CommonMiddleware",
     "django.middleware.csrf.CsrfViewMiddleware",
     "django.contrib.auth.middleware.AuthenticationMiddleware",
@@ -167,6 +170,7 @@ SPECTACULAR_SETTINGS = {
 
 # SIMPLE JWT
 SIMPLE_JWT = {
+    "ROTATE_REFRESH_TOKENS": True,
     "ACCESS_TOKEN_LIFETIME": timedelta(minutes=120),
     "REFRESH_TOKEN_LIFETIME": timedelta(days=7),
 }
