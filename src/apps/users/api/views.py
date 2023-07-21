@@ -4,7 +4,7 @@ from rest_framework.permissions import IsAuthenticated
 from rest_framework.request import Request
 from rest_framework.response import Response
 
-from src.apps.users.models import User
+from src.apps.users.models.users import User
 from src.apps.base.api.mixins import PermissionPerAction, SerializerPerAction
 from src.apps.events.api.serializers import EventSerializer
 from src.apps.users.api.serializers import (
