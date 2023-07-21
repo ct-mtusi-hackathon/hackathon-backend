@@ -3,6 +3,16 @@ from rest_framework import serializers
 from rest_framework.validators import UniqueValidator
 
 from src.apps.users.models.users import User
+from src.apps.users.models.accounts import UserAccount
+
+
+class UserAccountSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = UserAccount
+        fields = (
+            "account_number",
+            "coins",
+        )
 
 
 class UserSerializer(serializers.ModelSerializer):
@@ -17,12 +27,12 @@ class UserSerializer(serializers.ModelSerializer):
             "last_name",
             "patronymic",
             "group",
-            "coins",
         )
 
 
 class UserProfileSerializer(serializers.ModelSerializer):
     group = serializers.StringRelatedField(many=True)
+    coins = UserAccountSerializer(read_only=True, many=False)
 
     class Meta:
         model = User
