@@ -5,7 +5,6 @@ from phonenumber_field.modelfields import PhoneNumberField
 
 from src.apps.users.consts import UserType, UserSex
 from src.apps.groups.models import Group
-from src.apps.users.signals import create_user_account
 
 
 class User(AbstractUser):
@@ -28,6 +27,7 @@ class User(AbstractUser):
     group = models.ManyToManyField(
         Group, related_name="groups", verbose_name=_("Группа пользователя")
     )
+    coins = models.PositiveIntegerField(_("Количество коинов"), default=0)
 
     REQUIRED_FIELDS = ["first_name", "last_name", "patronymic"]
 
@@ -38,6 +38,3 @@ class User(AbstractUser):
         verbose_name_plural = "Пользователи"
         verbose_name = "Пользователь"
         unique_together = ("email", "type_account")
-
-
-models.signals.post_save.connect(create_user_account, User)
