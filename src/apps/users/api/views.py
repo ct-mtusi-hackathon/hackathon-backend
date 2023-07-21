@@ -8,6 +8,7 @@ from src.apps.users.models.users import User
 from src.apps.base.api.mixins import PermissionPerAction, SerializerPerAction
 from src.apps.events.api.serializers import EventSerializer
 from src.apps.users.api.serializers import (
+    UserAccountSerializer,
     UserProfileSerializer,
     UserSerializer,
     UserUpdateProfile,
@@ -23,6 +24,7 @@ class UserProfileViewSet(
         "profile": UserProfileSerializer,
         "update_profile": UserUpdateProfile,
         "my_events": EventSerializer,
+        "my_balance": UserAccountSerializer,
     }
     action_permissions = {"default": (IsAuthenticated,)}
 
@@ -47,3 +49,10 @@ class UserProfileViewSet(
             return Response("Вы не участвуете в мероприятиях!")
         else:
             return Response(serializer.data)
+
+    @action(methods=["GET"], detail=False)
+    def my_balance(self, request: Request, *args, **kwargs):
+        user = request.user
+        balance = user.coins
+        serializer = self.get_serializer(balance)
+        return Response(serializer.data)
