@@ -46,7 +46,7 @@ class EventViewSet(SerializerPerAction, PermissionPerAction, viewsets.ModelViewS
         event = self.get_object()
         serializer = self.get_serializer(event)
         user = request.user
-        if event.participants.contains(user):
+        if not event.participants.contains(user):
             return Response("Невозможно отменить участие!")
         event.participants.remove(user)
         return Response(
