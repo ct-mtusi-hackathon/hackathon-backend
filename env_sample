@@ -1,7 +1,12 @@
 # Django
-SECRET_KEY = your secret key
-DEBUG = 1
+SECRET_KEY=your secret key
+DEBUG=1
 SERVER_PORT=8000
+DJANGO_SUPERUSER_USERNAME=admin
+DJANGO_SUPERUSER_PASSWORD=admin
+DJANGO_SUPERUSER_FIRST_NAME=admin
+DJANGO_SUPERUSER_LAST_NAME=admin
+DJANGO_SUPERUSER_PATRONYMIC=admin
 
 # PostgreSQL
 POSTGRES_USER=postgres
@@ -10,3 +15,8 @@ POSTGRES_DB=postgres
 POSTGRES_PORT=5432
 # to use django locally (not in container) with postgres - change postgres host to `localhost`
 POSTGRES_HOST=db
+
+# Redis
+REDIS_PORT=6397
+CELERY_BROKER_URL="redis://redis:6379/0"
+CELERY_RESULT_BACKEND="redis://redis:6379/0"

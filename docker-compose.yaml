@@ -13,21 +13,40 @@ services:
     ports:
       - ${POSTGRES_PORT-5432}:5432
 
+  redis:
+    image: redis
+    container_name: mtusi-redis
+    restart: always
+    ports:
+      - ${REDIS_PORT-6397}:6397
+
   server:
     build:
       context: .
-      dockerfile: web.Dockerfile
-      target: production
-    depends_on:
-      - db
+      dockerfile: Dockerfile
+      target: builder-base
     restart: always
-    container_name: hackathon-server
+    container_name: server
     volumes:
-      - ./static:/app/src/static
-      - ./media:/app/src/media
+      - ./static:/code/static
+      - ./media:/code/media
     env_file: .env
     ports:
-      - ${SERVER_PORT-8080}:8000
+      - ${SERVER_PORT-8000}:8000
+    entrypoint: ["/code/entrypoint.sh"]
+    depends_on:
+      - db
+      - redis
+
+  worker:
+    container_name: celery-worker
+    build: .
+    command: celery -A src.hackathon worker -l info
+    env_file:
+      .env
+    depends_on:
+      - redis
+      - server
 
 volumes:
   postgres_data:
